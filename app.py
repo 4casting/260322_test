@@ -499,7 +499,7 @@ with tab4:
         st.markdown(f"""
         <div class="metric-card option-c">
             <div class="metric-label">Median t_bellman</div>
-            <div class="metric-value">Year {median_switch:.1f if median_switch else "—"}</div>
+            <div class="metric-value">Year {f"{median_switch:.1f}" if median_switch else "—"}</div>
             <div class="metric-sub">Optimal switch timing</div>
         </div>""", unsafe_allow_html=True)
 
