@@ -220,6 +220,11 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
 
 COLOR = {"A": "#2563eb", "B": "#dc2626", "C": "#059669"}
 
+def hex_rgba(hex_color: str, alpha: float) -> str:
+    h = hex_color.lstrip("#")
+    r, g, b = int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)
+    return f"rgba({r},{g},{b},{alpha})"
+
 # ═════════════════════════════════════════════════════════════════════════════
 # TAB 1 – OVERVIEW
 # ═════════════════════════════════════════════════════════════════════════════
@@ -314,13 +319,13 @@ with tab2:
         fig_cust.add_trace(go.Scatter(
             x=years, y=ac_p95, mode="lines",
             line=dict(width=0), showlegend=False,
-            fillcolor=COLOR[key].replace(")", ", 0.12)").replace("rgb", "rgba") if "rgb" in COLOR[key] else COLOR[key] + "20",
+            fillcolor=hex_rgba(COLOR[key], 0.12),
         ))
         fig_cust.add_trace(go.Scatter(
             x=years, y=ac_p5, mode="lines",
             line=dict(width=0),
             fill="tonexty",
-            fillcolor=COLOR[key] + "20",
+            fillcolor=hex_rgba(COLOR[key], 0.12),
             showlegend=False,
         ))
         fig_cust.add_trace(go.Scatter(
@@ -388,11 +393,11 @@ with tab3:
 
         fig_w.add_trace(go.Scatter(
             x=years, y=[v/1e3 for v in w_p95], mode="lines",
-            line=dict(width=0), showlegend=False, fillcolor=COLOR[key] + "18",
+            line=dict(width=0), showlegend=False, fillcolor=hex_rgba(COLOR[key], 0.12),
         ))
         fig_w.add_trace(go.Scatter(
             x=years, y=[v/1e3 for v in w_p5], mode="lines",
-            line=dict(width=0), fill="tonexty", fillcolor=COLOR[key] + "18", showlegend=False,
+            line=dict(width=0), fill="tonexty", fillcolor=hex_rgba(COLOR[key], 0.12), showlegend=False,
         ))
         fig_w.add_trace(go.Scatter(
             x=years, y=[v/1e3 for v in w_mean],
